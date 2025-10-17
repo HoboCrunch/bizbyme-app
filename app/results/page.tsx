@@ -86,7 +86,7 @@ export default function ResultsPage() {
         body: JSON.stringify({
           zipCode: searchParams.zipCode,
           business: searchParams.business,
-          afterDate: latestDate.toISOString().split('T')[0], // Format as YYYY-MM-DD
+          afterDate: (latestDate as Date).toISOString().split('T')[0], // Format as YYYY-MM-DD
         }),
       });
 
