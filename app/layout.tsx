@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://bizbyme-app.vercel.app'),
   title: "Biz By Me - Find Local Business Networking Events",
   description: "Search local networking opportunities to maximize your business development",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   icons: {
     icon: "/bizbyme-logo.png",
     apple: "/bizbyme-logo.png",

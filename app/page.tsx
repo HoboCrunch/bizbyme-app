@@ -101,7 +101,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col animate-fadeIn">
       {/* Minimal Header */}
-      <header className="absolute top-0 left-0 p-6 md:p-8">
+      <header className="p-4 md:p-6 lg:p-8">
         <div className="flex items-center gap-2.5 opacity-90 hover:opacity-100 transition-opacity">
           <Image
             src="/bizbyme-logo.png"
@@ -110,22 +110,22 @@ export default function Home() {
             height={32}
             className="rounded-full"
           />
-          <h1 className="text-lg font-normal tracking-tight">Biz By Me</h1>
+          <h1 className="text-base md:text-lg font-normal tracking-tight">Biz By Me</h1>
         </div>
       </header>
 
       {/* Hero Content */}
-      <main className="flex-1 flex items-center justify-center px-6 py-20">
+      <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-8 md:py-12">
         <div className="w-full max-w-3xl space-y-8">
           {/* Headline */}
-          <div className="text-center space-y-3 mb-16">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight">
+          <div className="text-center space-y-3 mb-12 md:mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight">
               Find your next
             </h2>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               opportunity
             </h2>
-            <p className="text-gray-400 text-lg md:text-xl mt-6 font-light">
+            <p className="text-gray-400 text-base sm:text-lg md:text-xl mt-4 md:mt-6 font-light">
               Discover networking events tailored to your business
             </p>
           </div>
@@ -134,12 +134,10 @@ export default function Home() {
           <form
             onSubmit={handleSearch}
             className="relative"
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
           >
             <div className={`
               flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0
-              bg-[#2a2a2a] rounded-2xl md:rounded-full p-3 md:p-1.5
+              bg-[#2a2a2a] rounded-2xl md:rounded-full p-2 md:p-1.5
               border transition-all duration-200
               ${isFocused ? 'border-gray-500 shadow-[0_0_0_3px_rgba(75,85,99,0.1)]' : 'border-gray-700'}
               ${isLoading ? 'opacity-70' : ''}
@@ -149,7 +147,9 @@ export default function Home() {
                 placeholder="Zip Code"
                 value={zipCode}
                 onChange={(e) => setZipCode(e.target.value)}
-                className="w-full md:w-28 bg-transparent px-5 py-3 md:py-2.5 outline-none text-white placeholder-gray-500"
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                className="w-full md:w-28 bg-transparent px-4 py-3.5 md:py-2.5 outline-none text-white placeholder-gray-500 text-base"
                 disabled={isLoading}
               />
               <div className="hidden md:block w-px h-6 bg-gray-600"></div>
@@ -158,19 +158,24 @@ export default function Home() {
                 placeholder="Describe your business"
                 value={business}
                 onChange={(e) => setBusiness(e.target.value)}
-                className="flex-[2] bg-transparent px-5 py-3 md:py-2.5 outline-none text-white placeholder-gray-500"
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                className="flex-[2] bg-transparent px-4 py-3.5 md:py-2.5 outline-none text-white placeholder-gray-500 text-base"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !zipCode || !business}
                 className={`
-                  bg-white text-black px-7 py-3 md:py-2.5 rounded-xl md:rounded-full
-                  font-medium transition-all duration-200
-                  hover:bg-gray-100 hover:scale-[1.02]
-                  disabled:cursor-not-allowed disabled:hover:scale-100
+                  bg-white text-black px-6 py-3.5 md:px-7 md:py-2.5 rounded-xl md:rounded-full
+                  font-medium transition-all duration-200 text-base
+                  hover:bg-gray-100 active:scale-95
+                  disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+                  min-h-[44px] w-full md:w-auto
+                  touch-manipulation
                   ${isLoading ? 'animate-pulse' : ''}
                 `}
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">
@@ -200,21 +205,22 @@ export default function Home() {
 
           {/* Example Searches */}
           {!zipCode && !business && (
-            <div className="flex flex-wrap items-center justify-center gap-3 mt-8 animate-fadeIn">
-              <span className="text-sm text-gray-500">Try:</span>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mt-6 md:mt-8 animate-fadeIn">
+              <span className="text-xs md:text-sm text-gray-500 w-full text-center md:w-auto">Try:</span>
               {exampleSearches.map((example, index) => (
                 <button
                   key={index}
                   onClick={() => handleExampleClick(example)}
                   className="
-                    px-4 py-2 rounded-full
+                    px-3 py-2.5 md:px-4 md:py-2 rounded-full
                     bg-white/5 border border-gray-700
                     hover:bg-white/10 hover:border-gray-600
                     transition-all duration-200 hover:scale-105
-                    text-sm text-gray-300
+                    text-xs md:text-sm text-gray-300
+                    min-h-[44px] flex items-center
                   "
                 >
-                  {example.zip} · {example.business}
+                  <span className="whitespace-nowrap">{example.zip} · {example.business}</span>
                 </button>
               ))}
             </div>
@@ -223,8 +229,8 @@ export default function Home() {
       </main>
 
       {/* Minimal Footer */}
-      <footer className="absolute bottom-0 left-0 p-6 md:p-8">
-        <button className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-colors text-sm group">
+      <footer className="p-4 md:p-6 lg:p-8">
+        <button className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-colors text-sm group min-h-[44px]">
           <span className="text-lg group-hover:scale-110 transition-transform">?</span>
           <span>About</span>
         </button>
